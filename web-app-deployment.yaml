@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <web-app-deployment>
+  namespace: <your-namespace>
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: alb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: <web-app>
+  template:
+    metadata:
+      labels:
+        app: <web-app>
+    spec:
+      containers:
+        - name: <name-of-container>
+          image: <image>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          restartPolicy: Always
+
